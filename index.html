@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>全景场景跳转</title>
+    <!-- 加载 Pannellum 的 CSS 和 JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            height: 100%;
+        }
+        #panorama {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<div id="panorama"></div>
+
+<script>
+    pannellum.viewer('panorama', {
+        "default": {
+            "firstScene": "scene1",
+            "sceneFadeDuration": 1000
+        },
+        "scenes": {
+            "scene1": {
+                "title": "场景一：房间A",
+                "type": "equirectangular",
+                "panorama": "scene1.jpg",
+                "autoLoad": true,
+                "hotSpots": [
+                    {
+                        "pitch": 0,    // 上下方向角度（可调）
+                        "yaw": 90,     // 左右方向角度（可调）
+                        "type": "scene",
+                        "text": "点我进入房间B",
+                        "sceneId": "scene2"
+                    }
+                ]
+            },
+            "scene2": {
+                "title": "场景二：房间B",
+                "type": "equirectangular",
+                "panorama": "scene2.jpg",
+                "autoLoad": true,
+                "hotSpots": [
+                    {
+                        "pitch": 0,
+                        "yaw": 270,
+                        "type": "scene",
+                        "text": "返回房间A",
+                        "sceneId": "scene1"
+                    }
+                ]
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
